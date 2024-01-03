@@ -18,9 +18,9 @@ public class FindByIdBoard {
     }
 
     public Mono<BoardResponse> execute(String id) {
-        return boardRepository.findById(id)
+        return Mono.defer(() -> boardRepository.findById(id)
                 .flatMap(boardToBoardResponse::rapping)
-                .switchIfEmpty(Mono.error(new Exception("게시물을 찾지 못함")));
+                .switchIfEmpty(Mono.error(new Exception("게시물을 찾지 못함"))));
     }
 
 }
