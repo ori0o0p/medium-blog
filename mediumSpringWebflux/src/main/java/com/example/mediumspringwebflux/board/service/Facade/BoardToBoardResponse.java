@@ -2,10 +2,10 @@ package com.example.mediumspringwebflux.board.service.Facade;
 
 import com.example.mediumspringwebflux.board.document.Board;
 import com.example.mediumspringwebflux.board.dto.BoardResponse;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 import reactor.core.publisher.Mono;
 
-@Service
+@Component
 public class BoardToBoardResponse {
 
     public Mono<BoardResponse> rapping(Board board) {

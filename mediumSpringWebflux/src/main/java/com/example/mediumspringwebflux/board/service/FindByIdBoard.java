@@ -1,25 +1,24 @@
 package com.example.mediumspringwebflux.board.service;
 
 import com.example.mediumspringwebflux.board.dto.BoardResponse;
-import com.example.mediumspringwebflux.board.repository.BoardRepository;
 import com.example.mediumspringwebflux.board.service.Facade.BoardToBoardResponse;
+import com.example.mediumspringwebflux.board.service.Facade.FindBoard;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
 
 @Service
 public class FindByIdBoard {
-    private final BoardRepository boardRepository;
     private final BoardToBoardResponse boardToBoardResponse;
+    private final FindBoard findBoard;
 
-    public FindByIdBoard(BoardRepository boardRepository, BoardToBoardResponse boardToBoardResponse) {
-        this.boardRepository = boardRepository;
+    public FindByIdBoard(BoardToBoardResponse boardToBoardResponse, FindBoard findBoard) {
         this.boardToBoardResponse = boardToBoardResponse;
+        this.findBoard = findBoard;
     }
 
     public Mono<BoardResponse> execute(String id) {
-        return Mono.defer(() -> boardRepository.findById(id)
-                .flatMap(boardToBoardResponse::rapping)
-                .switchIfEmpty(Mono.error(new Exception("게시물을 찾지 못함"))));
+        return Mono.defer(() -> findBoard.execute(id)
+                .flatMap(boardToBoardResponse::rapping));
     }
 
 }
