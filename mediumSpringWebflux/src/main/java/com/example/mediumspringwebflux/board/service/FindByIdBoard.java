@@ -1,6 +1,5 @@
 package com.example.mediumspringwebflux.board.service;
 
-import com.example.mediumspringwebflux.board.document.Board;
 import com.example.mediumspringwebflux.board.dto.BoardResponse;
 import com.example.mediumspringwebflux.board.repository.BoardRepository;
 import com.example.mediumspringwebflux.board.service.Facade.BoardToBoardResponse;
