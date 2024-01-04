@@ -1,5 +1,6 @@
 package com.example.mediumspringwebflux.board.service;
 
+import com.example.mediumspringwebflux.board.document.Board;
 import com.example.mediumspringwebflux.board.dto.BoardRequest;
 import com.example.mediumspringwebflux.board.repository.BoardRepository;
 import com.example.mediumspringwebflux.board.service.Facade.FindBoard;
@@ -18,10 +19,14 @@ public class UpdateBoard {
 
     public Mono<Void> execute(String id, BoardRequest request) {
         return Mono.defer(() -> findBoard.execute(id)
-                .flatMap(board -> {
-                    board.edit(request.title(), request.description());
-                    return boardRepository.save(board);
-                })).then();
+                .flatMap(board -> updateBoard(board, request)))
+                .then();
+    }
+
+    private Mono<Board> updateBoard(Board board, BoardRequest request) {
+        return Mono.fromRunnable(() -> {
+            board.edit(request.title(), request.description());
+        }).thenReturn(board);
     }
 
 }
