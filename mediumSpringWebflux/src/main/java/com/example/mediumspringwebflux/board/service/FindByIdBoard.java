@@ -1,8 +1,8 @@
 package com.example.mediumspringwebflux.board.service;
 
 import com.example.mediumspringwebflux.board.dto.BoardResponse;
-import com.example.mediumspringwebflux.board.service.Facade.BoardToBoardResponse;
-import com.example.mediumspringwebflux.board.service.Facade.FindBoard;
+import com.example.mediumspringwebflux.board.service.facade.BoardToBoardResponse;
+import com.example.mediumspringwebflux.board.service.facade.FindBoard;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
 

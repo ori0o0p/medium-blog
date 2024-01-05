@@ -3,7 +3,7 @@ package com.example.mediumspringwebflux.board.service;
 import com.example.mediumspringwebflux.board.document.Board;
 import com.example.mediumspringwebflux.board.dto.BoardRequest;
 import com.example.mediumspringwebflux.board.repository.BoardRepository;
-import com.example.mediumspringwebflux.board.service.Facade.FindBoard;
+import com.example.mediumspringwebflux.board.service.facade.FindBoard;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
 

@@ -1,4 +1,4 @@
-package com.example.mediumspringwebflux.board.service.Facade;
+package com.example.mediumspringwebflux.board.service.facade;
 
 import com.example.mediumspringwebflux.board.document.Board;
 import com.example.mediumspringwebflux.board.repository.BoardRepository;
