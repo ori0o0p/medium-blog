@@ -16,12 +16,12 @@ public class CreateBoard {
     }
 
     public Mono<Void> execute(BoardRequest request) {
-        return Mono.just(request)
-                .map(req -> Board.builder()
-                        .title(req.title())
-                        .description(req.description())
+        return Mono.just(Board.builder()
+                        .title(request.title())
+                        .description(request.description())
                         .build())
-                .flatMap(boardRepository::save).then();
+                .flatMap(boardRepository::save)
+                .then();
     }
 
 }
