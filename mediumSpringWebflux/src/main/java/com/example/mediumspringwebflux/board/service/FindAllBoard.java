@@ -1,12 +1,10 @@
 package com.example.mediumspringwebflux.board.service;
 
-import com.example.mediumspringwebflux.board.document.Board;
 import com.example.mediumspringwebflux.board.dto.BoardResponse;
 import com.example.mediumspringwebflux.board.repository.BoardRepository;
 import com.example.mediumspringwebflux.board.service.Facade.BoardToBoardResponse;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
-import reactor.core.publisher.Mono;
 import reactor.core.scheduler.Schedulers;
 
 @Service
