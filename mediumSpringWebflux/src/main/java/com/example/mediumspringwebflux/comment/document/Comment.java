@@ -1,6 +1,7 @@
 package com.example.mediumspringwebflux.comment.document;
 
 import com.example.mediumspringwebflux.board.document.Board;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -18,13 +19,13 @@ public class Comment {
 
     private String comment;
 
-    @DBRef(lazy = true)
-    private Board board;
+    @JsonIgnore
+    private String boardId;
 
     @Builder
-    public Comment(String comment, Board board) {
+    public Comment(String comment, String boardId) {
         this.comment = comment;
-        this.board = board;
+        this.boardId = boardId;
     }
 
 }
