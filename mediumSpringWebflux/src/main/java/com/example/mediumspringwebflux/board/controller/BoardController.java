@@ -2,10 +2,7 @@ package com.example.mediumspringwebflux.board.controller;
 
 import com.example.mediumspringwebflux.board.dto.BoardRequest;
 import com.example.mediumspringwebflux.board.dto.BoardResponse;
-import com.example.mediumspringwebflux.board.service.CreateBoard;
-import com.example.mediumspringwebflux.board.service.FindAllBoard;
-import com.example.mediumspringwebflux.board.service.FindByIdBoard;
-import com.example.mediumspringwebflux.board.service.UpdateBoard;
+import com.example.mediumspringwebflux.board.service.*;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -17,12 +14,14 @@ public class BoardController {
     private final FindAllBoard findAllBoard;
     private final FindByIdBoard findByIdBoard;
     private final UpdateBoard updateBoard;
+    private final DeleteBoard deleteBoard;
 
-    public BoardController(CreateBoard createBoard, FindAllBoard findAllBoard, FindByIdBoard findByIdBoard, UpdateBoard updateBoard) {
+    public BoardController(CreateBoard createBoard, FindAllBoard findAllBoard, FindByIdBoard findByIdBoard, UpdateBoard updateBoard, DeleteBoard deleteBoard) {
         this.createBoard = createBoard;
         this.findAllBoard = findAllBoard;
         this.findByIdBoard = findByIdBoard;
         this.updateBoard = updateBoard;
+        this.deleteBoard = deleteBoard;
     }
 
     @PostMapping
@@ -43,6 +42,11 @@ public class BoardController {
     @PutMapping("/{id}")
     public Mono<Void> update(@RequestBody BoardRequest request, @PathVariable String id) {
         return updateBoard.execute(id, request);
+    }
+
+    @DeleteMapping("/{id}")
+    public Mono<Void> delete(@PathVariable String id) {
+        return deleteBoard.execute(id);
     }
 
 }
