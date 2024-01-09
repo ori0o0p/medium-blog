@@ -2,24 +2,29 @@ package com.example.mediumspringwebflux.comment.controller;
 
 import com.example.mediumspringwebflux.comment.dto.CommentRequest;
 import com.example.mediumspringwebflux.comment.service.CreateComment;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.example.mediumspringwebflux.comment.service.DeleteComment;
+import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Mono;
 
 @RestController
 @RequestMapping("/comments")
 public class CommentController {
     private final CreateComment createComment;
+    private final DeleteComment deleteComment;
 
-    public CommentController(CreateComment createComment) {
+    public CommentController(CreateComment createComment, DeleteComment deleteComment) {
         this.createComment = createComment;
+        this.deleteComment = deleteComment;
     }
 
     @PostMapping
     public Mono<Void> create(@RequestBody CommentRequest request) {
         return createComment.execute(request);
+    }
+
+    @DeleteMapping("/{id}")
+    public Mono<Void> delete(@PathVariable String id) {
+        return deleteComment.execute(id);
     }
 
 }
