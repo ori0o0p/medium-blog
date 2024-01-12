@@ -6,7 +6,6 @@ import com.example.mediumspringwebfluxcorutine.board.repository.BoardRepository
 import kotlinx.coroutines.reactor.awaitSingle
 import org.springframework.stereotype.Service
 import java.time.LocalDateTime
-import java.util.Date
 
 @Service
 class CreateBoard(
