@@ -16,15 +16,7 @@ class FindAllBoard(
         val boards: List<Board> = boardRepository.findAll()
             .asFlow().toList()
 
-        return boards.map { b -> wrap(b) }
-    }
-
-    private fun wrap(board: Board): BoardResponse {
-        return BoardResponse(
-            id = board.id.toString(),
-            title = board.title,
-            content = board.content
-        )
+        return boards.map { b -> b.toBoardResponse() }
     }
 
 }
