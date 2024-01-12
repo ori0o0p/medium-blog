@@ -5,6 +5,8 @@ import com.example.mediumspringwebfluxcorutine.board.dto.BoardRequest
 import com.example.mediumspringwebfluxcorutine.board.repository.BoardRepository
 import kotlinx.coroutines.reactor.awaitSingle
 import org.springframework.stereotype.Service
+import java.time.LocalDateTime
+import java.util.Date
 
 @Service
 class CreateBoard(
@@ -14,7 +16,8 @@ class CreateBoard(
     suspend fun execute(boardRequest: BoardRequest) {
         boardRepository.save(Board(
                 title = boardRequest.title,
-                content = boardRequest.content))
+                content = boardRequest.content,
+                createdDate = LocalDateTime.now()))
             .awaitSingle()
     }
 
