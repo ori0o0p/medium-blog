@@ -5,7 +5,9 @@ import com.example.mediumspringwebfluxcorutine.board.dto.BoardResponse
 import com.example.mediumspringwebfluxcorutine.board.repository.BoardRepository
 import kotlinx.coroutines.flow.toList
 import kotlinx.coroutines.reactive.asFlow
+import org.springframework.stereotype.Service
 
+@Service
 class FindAllBoard(
     private val boardRepository: BoardRepository
 ) {
