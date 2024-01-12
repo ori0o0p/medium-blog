@@ -14,10 +14,10 @@ class FindAllBoard(
         val boards: List<Board> = boardRepository.findAll()
             .asFlow().toList()
 
-        return boards.map { b -> warp(b) }
+        return boards.map { b -> wrap(b) }
     }
 
-    private fun warp(board: Board): BoardResponse {
+    private fun wrap(board: Board): BoardResponse {
         return BoardResponse(
             id = board.id.toString(),
             title = board.title,
