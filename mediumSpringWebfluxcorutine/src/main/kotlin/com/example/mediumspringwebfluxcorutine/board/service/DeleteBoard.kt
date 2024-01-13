@@ -1,7 +1,6 @@
 package com.example.mediumspringwebfluxcorutine.board.service
 
 import com.example.mediumspringwebfluxcorutine.board.repository.BoardRepository
-import kotlinx.coroutines.reactor.awaitSingle
 import kotlinx.coroutines.reactor.awaitSingleOrNull
 import org.springframework.stereotype.Service
 
