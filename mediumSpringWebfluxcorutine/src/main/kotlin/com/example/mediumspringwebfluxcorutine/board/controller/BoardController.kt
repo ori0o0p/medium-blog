@@ -28,7 +28,6 @@ class BoardController(
     @GetMapping("/{id}")
     suspend fun findById(@PathVariable id: String): BoardResponse = findByIdBoard.execute(id)
 
-
     @PostMapping
     suspend fun create(@RequestBody boardRequest: BoardRequest) = createBoard.execute(boardRequest)
 
