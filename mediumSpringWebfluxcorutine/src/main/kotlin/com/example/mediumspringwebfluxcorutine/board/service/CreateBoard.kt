@@ -16,7 +16,8 @@ class CreateBoard(
         boardRepository.save(Board(
                 title = boardRequest.title,
                 content = boardRequest.content,
-                createdDate = LocalDateTime.now()))
+                createdDate = LocalDateTime.now(),
+                updatedDate = LocalDateTime.now()))
             .awaitSingle()
     }
 
