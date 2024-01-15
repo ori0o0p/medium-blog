@@ -20,13 +20,11 @@ public class WebClientService {
                 .baseUrl(URL)
                 .build();
 
-        Map<String, Object> response = webClient
+        Object response = webClient
                 .get()
-                .uri(uriBuilder -> uriBuilder
-                        .path("/api")
-                        .build())
+                .uri("/api")
                 .retrieve()
-                .bodyToMono(Map.class)
+                .bodyToMono(Object.class)
                 .block();
 
         log.info(response.toString());
