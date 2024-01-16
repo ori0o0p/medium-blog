@@ -40,9 +40,13 @@ public class Tokenizer {
         }
     }
 
-    private Jws<?> parse(String token){
+    private Jws<Claims> parse(String token) {
         return Jwts.parser().setSigningKey(SECRET)
                 .parseClaimsJws(token);
+    }
+
+    public Claims parseClaims(String token) {
+        return parse(token).getBody();
     }
 
 }
