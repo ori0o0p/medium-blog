@@ -1,6 +1,7 @@
 package com.example.mediumspringwebflux.global.security;
 
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.stereotype.Component;
@@ -28,6 +29,20 @@ public class Tokenizer {
                 .setExpiration(expiresAt)
                 .signWith(SignatureAlgorithm.HS256, SECRET)
                 .compact();
+    }
+
+    public Boolean verify(String token) {
+        try {
+            parse(token);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    private Jws<?> parse(String token){
+        return Jwts.parser().setSigningKey(SECRET)
+                .parseClaimsJws(token);
     }
 
 }
