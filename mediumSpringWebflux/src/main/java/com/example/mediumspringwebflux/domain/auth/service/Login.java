@@ -1,5 +1,6 @@
 package com.example.mediumspringwebflux.domain.auth.service;
 
+import com.example.mediumspringwebflux.domain.auth.dto.LoginRequest;
 import com.example.mediumspringwebflux.domain.user.repository.UserRepository;
 import com.example.mediumspringwebflux.global.security.Tokenizer;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -18,7 +19,7 @@ public class Login {
         this.passwordEncoder = passwordEncoder;
     }
 
-    public Mono<Void> execute() {
+    public Mono<Void> execute(LoginRequest request) {
         return Mono.empty();
     }
 
