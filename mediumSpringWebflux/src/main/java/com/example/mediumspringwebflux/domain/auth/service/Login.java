@@ -22,8 +22,8 @@ public class Login {
 
     public Mono<LoginResponse> execute(LoginRequest request) {
         return userRepository.findByEmail(request.email())
-                .switchIfEmpty(Mono.error(new RuntimeException("유저를 찾지 못")))
                 .filter(user -> passwordEncoder.matches(request.password(), user.getPassword()))
+                .switchIfEmpty(Mono.error(new RuntimeException("유저를 찾지 못함")))
                 .map(user -> {
                     final String token = tokenizer.createToken(user.getEmail());
 
