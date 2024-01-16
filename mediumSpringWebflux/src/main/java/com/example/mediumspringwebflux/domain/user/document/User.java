@@ -19,14 +19,17 @@ public class User {
 
     private String email;
 
+    private String name;
+
     private String password;
 
     @CreatedDate
     private LocalDate createdDate;
 
     @Builder
-    public User(String email, String password, LocalDate createdDate) {
+    public User(String email, String name, String password, LocalDate createdDate) {
         this.email = email;
+        this.name = name;
         this.password = password;
         this.createdDate = createdDate;
     }
