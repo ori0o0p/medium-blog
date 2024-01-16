@@ -1,6 +1,7 @@
 package com.example.mediumspringwebflux.domain.board.document;
 
 import com.example.mediumspringwebflux.domain.comment.document.Comment;
+import com.example.mediumspringwebflux.domain.user.document.User;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -23,12 +24,15 @@ public class Board {
 
     private String description;
 
+    private User writer;
+
     private List<Comment> comments = Lists.mutable.of();
 
     @Builder
-    public Board(String title, String description, List<Comment> comments) {
+    public Board(String title, String description, User writer, List<Comment> comments) {
         this.title = title;
         this.description = description;
+        this.writer = writer;
         this.comments = comments;
     }
 
