@@ -1,4 +1,6 @@
 package com.example.mediumspringwebflux.domain.auth.dto;
 
-public record LoginResponse() {
+public record LoginResponse(
+        String token
+) {
 }
