@@ -22,6 +22,10 @@ public class SecurityConfig {
         this.tokenizer = tokenizer;
     }
 
+    private static final String[] WHITE_LIST = {
+            "/auth/**"
+    };
+
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
@@ -30,7 +34,7 @@ public class SecurityConfig {
     @Bean
     public SecurityWebFilterChain filterChain(ServerHttpSecurity http) {
         return http.authorizeExchange(exchanges -> exchanges
-                .pathMatchers().permitAll()
+                .pathMatchers(WHITE_LIST).permitAll()
                 .anyExchange().authenticated())
                 .csrf(ServerHttpSecurity.CsrfSpec::disable)
                 .formLogin(ServerHttpSecurity.FormLoginSpec::disable)
