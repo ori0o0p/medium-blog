@@ -19,6 +19,10 @@ public class Tokenizer {
 
     private static final String SECRET = "secret";
 
+    public String createToken(String user) {
+        return tokenize(user, "access");
+    }
+
     private String tokenize(String user, String type) {
         Calendar calendar = Calendar.getInstance();
         calendar.add(Calendar.HOUR, 2);
