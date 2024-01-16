@@ -24,7 +24,7 @@ public class Signup {
                 .flatMap(user -> Mono.error(new RuntimeException("유저가 이미 존재")))
                 .switchIfEmpty(Mono.defer(() -> {
                     final String password = passwordEncoder.encode(request.password());
-                    
+
                     User user = User.builder()
                             .email(request.email())
                             .name(request.name())
