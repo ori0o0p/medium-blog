@@ -21,7 +21,7 @@ public class Signup {
 
     public Mono<Void> execute(SignupRequest request) {
         return userRepository.findByEmail(request.email())
-                .flatMap(user -> Mono.error(new RuntimeException("유저가 이미 존재")))
+                .flatMap(user -> Mono.error(new RuntimeException("이메일이 이미 사용중")))
                 .switchIfEmpty(Mono.defer(() -> {
                     final String password = passwordEncoder.encode(request.password());
 
