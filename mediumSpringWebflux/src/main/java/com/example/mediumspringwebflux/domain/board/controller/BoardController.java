@@ -2,7 +2,6 @@ package com.example.mediumspringwebflux.domain.board.controller;
 
 import com.example.mediumspringwebflux.domain.board.dto.BoardRequest;
 import com.example.mediumspringwebflux.domain.board.dto.BoardResponse;
-import com.example.mediumspringwebflux.board.service.*;
 import com.example.mediumspringwebflux.domain.board.service.*;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
