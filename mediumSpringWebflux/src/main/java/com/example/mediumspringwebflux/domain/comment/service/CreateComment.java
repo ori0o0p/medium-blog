@@ -8,6 +8,7 @@ import com.example.mediumspringwebflux.domain.comment.repository.CommentReposito
 import com.example.mediumspringwebflux.domain.user.service.UserFacade;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
+import reactor.util.function.Tuples;
 
 @Service
 public class CreateComment {
@@ -25,21 +26,20 @@ public class CreateComment {
 
     public Mono<Void> execute(CommentRequest request) {
         return userFacade.getUser()
-                .flatMap(user -> findBoard.execute(request.boardId())
-                        .flatMap(board -> {
-                            Comment comment = Comment.builder()
-                                    .comment(request.comment())
-                                    .boardId(board.getId())
-                                    .writer(user)
-                                    .build();
+                .zipWith(findBoard.execute(request.boardId()), (user, board) -> {
+                    Comment comment = Comment.builder()
+                            .comment(request.comment())
+                            .boardId(board.getId())
+                            .writer(user)
+                            .build();
 
-                            return commentRepository.save(comment)
-                                    .then(Mono.just(board))
-                                    .flatMap(b -> {
-                                        b.getComments().add(comment);
-                                        return boardRepository.save(b);
-                                    });
-                        })).then();
+                    board.getComments().add(comment);
+                    return Tuples.of(board, comment);
+                })
+                .flatMap(tuple -> commentRepository.save(tuple.getT2())
+                        .then(boardRepository.save(tuple.getT1())))
+                .then();
     }
+
 
 }
