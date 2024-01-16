@@ -4,9 +4,14 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
 
 @Component
@@ -45,8 +50,20 @@ public class Tokenizer {
                 .parseClaimsJws(token);
     }
 
-    public Claims parseClaims(String token) {
+    private Claims parseClaims(String token) {
         return parse(token).getBody();
+    }
+
+    private UserDetails createAuthenticatedUserFromClaims(Claims claims) {
+        String subject = claims.getSubject();
+        return new User(subject, "", Collections.emptyList());
+    }
+
+    public Authentication getAuthentication(String token) {
+        Claims claims = parseClaims(token);
+        UserDetails details = createAuthenticatedUserFromClaims(claims);
+        return new UsernamePasswordAuthenticationToken(
+                details, null, details.getAuthorities());
     }
 
 }
