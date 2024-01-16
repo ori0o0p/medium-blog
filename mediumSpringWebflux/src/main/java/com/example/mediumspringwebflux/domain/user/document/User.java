@@ -1,2 +1,34 @@
-package com.example.mediumspringwebflux.domain.user.document;public class User {
+package com.example.mediumspringwebflux.domain.user.document;
+
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+import java.time.LocalDate;
+
+@Getter
+@Document
+@NoArgsConstructor
+public class User {
+
+    @Id
+    private String id;
+
+    private String email;
+
+    private String password;
+
+    @CreatedDate
+    private LocalDate createdDate;
+
+    @Builder
+    public User(String email, String password, LocalDate createdDate) {
+        this.email = email;
+        this.password = password;
+        this.createdDate = createdDate;
+    }
+
 }
