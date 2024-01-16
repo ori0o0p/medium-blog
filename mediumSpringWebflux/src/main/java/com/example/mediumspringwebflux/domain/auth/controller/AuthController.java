@@ -1,8 +1,13 @@
 package com.example.mediumspringwebflux.domain.auth.controller;
 
+import com.example.mediumspringwebflux.domain.auth.dto.LoginRequest;
+import com.example.mediumspringwebflux.domain.auth.dto.LoginResponse;
 import com.example.mediumspringwebflux.domain.auth.service.Login;
 import com.example.mediumspringwebflux.domain.auth.service.Signup;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import reactor.core.publisher.Mono;
 
 @RestController
 public class AuthController {
@@ -12,6 +17,11 @@ public class AuthController {
     public AuthController(Login login, Signup signup) {
         this.login = login;
         this.signup = signup;
+    }
+
+    @PostMapping
+    public Mono<LoginResponse> setLogin(@RequestBody LoginRequest request) {
+        return login.execute(request);
     }
 
 }
