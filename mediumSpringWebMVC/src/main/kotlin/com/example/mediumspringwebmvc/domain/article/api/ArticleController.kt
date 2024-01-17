@@ -4,6 +4,7 @@ import com.example.mediumspringwebmvc.domain.article.dto.ArticleRequest
 import com.example.mediumspringwebmvc.domain.article.dto.ArticleResponse
 import com.example.mediumspringwebmvc.domain.article.service.*
 import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
@@ -25,7 +26,8 @@ class ArticleController(
     @GetMapping
     fun findAll(): List<ArticleResponse> = findAllArticle.execute()
 
-    fun findById() {}
+    @GetMapping("/{id}")
+    fun findById(@PathVariable id: Long): ArticleResponse = findByIdArticle.execute(id)
 
     fun update() {}
 
