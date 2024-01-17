@@ -1,3 +1,9 @@
 package com.example.mediumspringwebmvc.domain.comment.dto
 
-data class CommentRequest()
+import lombok.NonNull
+
+data class CommentRequest(
+    @NonNull
+    val articleId: Long,
+    val content: String
+)
