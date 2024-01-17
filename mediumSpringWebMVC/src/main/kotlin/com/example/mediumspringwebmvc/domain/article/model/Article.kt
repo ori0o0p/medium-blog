@@ -1,5 +1,6 @@
 package com.example.mediumspringwebmvc.domain.article.model
 
+import com.example.mediumspringwebmvc.domain.article.dto.ArticleResponse
 import jakarta.persistence.Entity
 import jakarta.persistence.GeneratedValue
 import jakarta.persistence.GenerationType
@@ -19,4 +20,11 @@ class Article(
     val createdDate: LocalDate
 
 ) {
+
+    fun toArticleResponse(): ArticleResponse = ArticleResponse(
+        id = id,
+        title = title,
+        description = description
+    )
+
 }
