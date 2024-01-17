@@ -16,7 +16,8 @@ class CreateArticle(
             title = request.title,
             description = request.description,
             createdDate = LocalDate.now(),
-            updatedDate = LocalDate.now())
+            updatedDate = LocalDate.now(),
+            comments = ArrayList())
 
         articleRepository.save(article)
     }
