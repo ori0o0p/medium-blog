@@ -19,7 +19,8 @@ class CreateArticle(
             description = request.description,
             createdDate = LocalDate.now(),
             updatedDate = LocalDate.now(),
-            comments = ArrayList())
+            comments = ArrayList(),
+            likes = ArrayList())
 
         articleRepository.save(article)
     }
