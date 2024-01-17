@@ -9,7 +9,7 @@ import jakarta.persistence.Id
 class Article(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Long,
+    val id: Long? = null,
 
     var title: String,
 
