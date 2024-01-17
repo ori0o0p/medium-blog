@@ -1,5 +1,6 @@
 package com.example.mediumspringwebmvc.domain.article.model
 
+import com.example.mediumspringwebmvc.domain.article.dto.ArticleRequest
 import com.example.mediumspringwebmvc.domain.article.dto.ArticleResponse
 import jakarta.persistence.Entity
 import jakarta.persistence.GeneratedValue
@@ -17,9 +18,17 @@ class Article(
 
     var description: String,
 
-    val createdDate: LocalDate
+    val createdDate: LocalDate,
+
+    var updatedDate: LocalDate
 
 ) {
+
+    fun edit(request: ArticleRequest) {
+        title = request.title
+        description = request.description
+        updatedDate = LocalDate.now()
+    }
 
     fun toArticleResponse(): ArticleResponse = ArticleResponse(
         id = id,
