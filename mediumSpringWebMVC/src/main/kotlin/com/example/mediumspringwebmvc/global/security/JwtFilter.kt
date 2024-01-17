@@ -4,12 +4,13 @@ import jakarta.servlet.FilterChain
 import jakarta.servlet.http.HttpServletRequest
 import jakarta.servlet.http.HttpServletResponse
 import org.springframework.http.HttpHeaders
+import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.util.StringUtils
 import org.springframework.web.filter.OncePerRequestFilter
 
 class JwtFilter(
     private val tokenizer: Tokenizer
-): OncePerRequestFilter {
+): OncePerRequestFilter() {
 
     override fun doFilterInternal(
         request: HttpServletRequest,
@@ -18,9 +19,12 @@ class JwtFilter(
     ) {
         val token = extractToken(request)
 
-        if (StringUtils.hasText(token) && ) {
-            
+        if (StringUtils.hasText(token) && tokenizer.verifyToken(token)) {
+            val authentication = tokenizer.getAuthentication(token)
+            SecurityContextHolder.getContext().authentication = authentication
         }
+
+        return filterChain.doFilter(request, response)
     }
 
     private fun extractToken(request: HttpServletRequest): String? {
