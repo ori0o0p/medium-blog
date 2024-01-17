@@ -1,17 +1,17 @@
 package com.example.mediumspringwebmvc.domain.article.service
 
 import com.example.mediumspringwebmvc.domain.article.dto.ArticleResponse
-import com.example.mediumspringwebmvc.domain.article.repository.ArticleRepository
+import com.example.mediumspringwebmvc.domain.article.service.facade.FindArticle
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
 
 @Service
 class FindByIdArticle(
-    private val articleRepository: ArticleRepository
+    private val findArticle: FindArticle
 ) {
 
     fun execute(id: Long): ArticleResponse {
-        val article = articleRepository.findByIdOrNull(id) ?: throw RuntimeException("게시물을 찾지 못함")
+        val article = findArticle.findById(id)
 
         return article.toArticleResponse()
     }
