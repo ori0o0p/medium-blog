@@ -4,6 +4,7 @@ import jakarta.persistence.Entity
 import jakarta.persistence.GeneratedValue
 import jakarta.persistence.GenerationType
 import jakarta.persistence.Id
+import java.time.LocalDate
 
 @Entity
 class Article(
@@ -14,6 +15,8 @@ class Article(
     var title: String,
 
     var description: String,
+
+    val createdDate: LocalDate
 
 ) {
 }
