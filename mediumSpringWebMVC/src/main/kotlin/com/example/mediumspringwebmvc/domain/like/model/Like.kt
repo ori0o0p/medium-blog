@@ -12,7 +12,7 @@ import jakarta.persistence.ManyToOne
 class Like(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Long,
+    val id: Long? = null,
 
     @ManyToOne
     @JoinColumn(name = "article_id")
