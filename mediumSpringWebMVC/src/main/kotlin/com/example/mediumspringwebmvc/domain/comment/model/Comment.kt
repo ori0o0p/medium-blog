@@ -1,6 +1,7 @@
 package com.example.mediumspringwebmvc.domain.comment.model
 
 import com.example.mediumspringwebmvc.domain.article.model.Article
+import com.example.mediumspringwebmvc.domain.comment.dto.CommentResponse
 import jakarta.persistence.Entity
 import jakarta.persistence.GeneratedValue
 import jakarta.persistence.GenerationType
@@ -21,4 +22,10 @@ class Comment(
     val article: Article
 
 ) {
+
+    fun toCommentResponse(): CommentResponse = CommentResponse(
+        id = id,
+        content = content
+    )
+
 }
