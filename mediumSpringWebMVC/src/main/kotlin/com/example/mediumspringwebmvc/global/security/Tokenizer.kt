@@ -1,6 +1,7 @@
 package com.example.mediumspringwebmvc.global.security
 
 import io.jsonwebtoken.*
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails
@@ -41,8 +42,15 @@ class Tokenizer {
             .parseClaimsJws(token)
     }
 
+    private fun parseClaims(token: String?): Claims {
+        return parse(token).body
+    }
+
     fun getAuthentication(token: String?): Authentication {
-        val claims =
+        val claims = parseClaims(token)
+        val userDetails = createUserByClaims(claims)
+
+        return UsernamePasswordAuthenticationToken(userDetails, null, userDetails.authorities)
     }
 
     private fun createUserByClaims(claims: Claims): UserDetails {
