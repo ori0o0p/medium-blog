@@ -26,8 +26,8 @@ class Article(
     var description: String,
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
-    val user: User,
+    @JoinColumn(name = "writer_id")
+    val writer: User,
 
     val createdDate: LocalDate,
 
@@ -49,7 +49,7 @@ class Article(
 
     fun toArticleResponse(): ArticleResponse = ArticleResponse(
         id = id,
-        user = user,
+        writer = writer,
         title = title,
         description = description
     )

@@ -21,7 +21,7 @@ class CreateArticle(
         val article = Article(
             title = request.title,
             description = request.description,
-            user = user,
+            writer = user,
             createdDate = LocalDate.now(),
             updatedDate = LocalDate.now(),
             comments = ArrayList(),

@@ -4,7 +4,7 @@ import com.example.mediumspringwebmvc.domain.user.model.User
 
 data class ArticleResponse(
     val id: Long?,
-    val user: User,
+    val writer: User,
     val title: String,
     val description: String
 )
