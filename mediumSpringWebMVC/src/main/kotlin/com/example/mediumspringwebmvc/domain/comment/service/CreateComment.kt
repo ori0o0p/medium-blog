@@ -24,7 +24,7 @@ class CreateComment(
         val comment = Comment(
             content = request.content,
             article = article,
-            user = user,
+            writer = user,
             createdDate = LocalDate.now())
 
         commentRepository.save(comment)

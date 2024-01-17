@@ -25,7 +25,7 @@ class Comment(
 
     @ManyToOne
     @JoinColumn(name = "user_id")
-    val user: User,
+    val writer: User,
 
     val createdDate: LocalDate
 
