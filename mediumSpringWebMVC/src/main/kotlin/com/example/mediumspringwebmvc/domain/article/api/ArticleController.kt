@@ -11,4 +11,15 @@ class ArticleController(
     private val updateArticle: UpdateArticle,
     private val deleteArticle: DeleteArticle
 ) {
+    
+    fun create() {}
+
+    fun findAll() {}
+
+    fun findById() {}
+
+    fun update() {}
+
+    fun delete() {}
+
 }
