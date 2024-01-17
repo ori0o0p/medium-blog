@@ -1,4 +1,21 @@
 package com.example.mediumspringwebmvc.domain.user.model
 
-class User {
+import jakarta.persistence.Entity
+import jakarta.persistence.GeneratedValue
+import jakarta.persistence.GenerationType
+import jakarta.persistence.Id
+
+@Entity
+class User(
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    val id: Long? = null,
+
+    var email: String,
+
+    var name: String,
+
+    var password: String
+
+) {
 }
