@@ -3,6 +3,7 @@ package com.example.mediumspringwebmvc.domain.article.api
 import com.example.mediumspringwebmvc.domain.article.dto.ArticleRequest
 import com.example.mediumspringwebmvc.domain.article.dto.ArticleResponse
 import com.example.mediumspringwebmvc.domain.article.service.*
+import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PatchMapping
 import org.springframework.web.bind.annotation.PathVariable
@@ -34,6 +35,7 @@ class ArticleController(
     fun update(@PathVariable id: Long, @RequestBody request: ArticleRequest) =
         updateArticle.execute(id, request)
 
-    fun delete() {}
+    @DeleteMapping("/{id}")
+    fun delete(@PathVariable id: Long) = deleteArticle.execute(id)
 
 }
