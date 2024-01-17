@@ -2,6 +2,7 @@ package com.example.mediumspringwebmvc.domain.comment.model
 
 import com.example.mediumspringwebmvc.domain.article.model.Article
 import com.example.mediumspringwebmvc.domain.comment.dto.CommentResponse
+import com.example.mediumspringwebmvc.domain.user.model.User
 import jakarta.persistence.Entity
 import jakarta.persistence.GeneratedValue
 import jakarta.persistence.GenerationType
@@ -21,6 +22,10 @@ class Comment(
     @ManyToOne
     @JoinColumn(name = "article_id")
     val article: Article,
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    val user: User,
 
     val createdDate: LocalDate
 

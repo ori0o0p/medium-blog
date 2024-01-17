@@ -1,6 +1,7 @@
 package com.example.mediumspringwebmvc.domain.like.model
 
 import com.example.mediumspringwebmvc.domain.article.model.Article
+import com.example.mediumspringwebmvc.domain.user.model.User
 import jakarta.persistence.Entity
 import jakarta.persistence.GeneratedValue
 import jakarta.persistence.GenerationType
@@ -16,7 +17,11 @@ class Like(
 
     @ManyToOne
     @JoinColumn(name = "article_id")
-    val article: Article
+    val article: Article,
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    val user: User
 
 ) {
 }
