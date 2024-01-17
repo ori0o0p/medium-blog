@@ -1,4 +1,19 @@
 package com.example.mediumspringwebmvc.domain.article.model
 
-class Article {
+import jakarta.persistence.Entity
+import jakarta.persistence.GeneratedValue
+import jakarta.persistence.GenerationType
+import jakarta.persistence.Id
+
+@Entity
+class Article(
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    val id: Long,
+
+    var title: String,
+
+    var description: String,
+
+) {
 }
