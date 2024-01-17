@@ -8,6 +8,7 @@ import jakarta.persistence.GenerationType
 import jakarta.persistence.Id
 import jakarta.persistence.JoinColumn
 import jakarta.persistence.ManyToOne
+import java.time.LocalDate
 
 @Entity
 class Comment(
@@ -19,7 +20,9 @@ class Comment(
 
     @ManyToOne
     @JoinColumn(name = "article_id")
-    val article: Article
+    val article: Article,
+
+    val createdDate: LocalDate
 
 ) {
 
