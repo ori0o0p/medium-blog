@@ -11,4 +11,9 @@ class CommentController(
     private val createComment: CreateComment,
     private val deleteComment: DeleteComment
 ) {
+
+    fun create() {}
+
+    fun delete() {}
+
 }
