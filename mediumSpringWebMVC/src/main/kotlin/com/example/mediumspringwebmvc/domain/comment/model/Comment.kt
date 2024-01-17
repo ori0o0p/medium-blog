@@ -33,6 +33,7 @@ class Comment(
 
     fun toCommentResponse(): CommentResponse = CommentResponse(
         id = id,
+        writer = writer,
         content = content
     )
 
