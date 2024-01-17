@@ -15,7 +15,8 @@ class CreateArticle(
         val article = Article(
             title = request.title,
             description = request.description,
-            createdDate = LocalDate.now())
+            createdDate = LocalDate.now(),
+            updatedDate = LocalDate.now())
 
         articleRepository.save(article)
     }
