@@ -1,16 +1,17 @@
 package com.example.mediumspringwebmvc.domain.article.service
 
 import com.example.mediumspringwebmvc.domain.article.repository.ArticleRepository
-import org.springframework.data.repository.findByIdOrNull
+import com.example.mediumspringwebmvc.domain.article.service.facade.FindArticle
 import org.springframework.stereotype.Service
 
 @Service
 class DeleteArticle(
-    private val articleRepository: ArticleRepository
+    private val articleRepository: ArticleRepository,
+    private val findArticle: FindArticle
 ) {
 
     fun execute(id: Long) {
-        val article = articleRepository.findByIdOrNull(id) ?: throw RuntimeException("게시물을 찾지 못함")
+        val article = findArticle.findById(id)
 
         articleRepository.delete(article)
     }
