@@ -12,7 +12,7 @@ class FindAllArticle(
     fun execute(): List<ArticleResponse> {
         val articles = articleRepository.findAll()
 
-        return articles.map { article -> article.toArticleResponse() }
+        return articles.map { it.toArticleResponse() }
     }
 
 }
