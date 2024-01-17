@@ -1,9 +1,11 @@
 package com.example.mediumspringwebmvc.domain.article.api
 
 import com.example.mediumspringwebmvc.domain.article.service.*
+import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
+@RequestMapping("/api/articles")
 class ArticleController(
     private val createArticle: CreateArticle,
     private val findByIdArticle: FindByIdArticle,
