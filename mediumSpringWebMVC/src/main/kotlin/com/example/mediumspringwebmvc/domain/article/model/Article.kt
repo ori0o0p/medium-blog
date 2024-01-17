@@ -49,6 +49,7 @@ class Article(
 
     fun toArticleResponse(): ArticleResponse = ArticleResponse(
         id = id,
+        user = user,
         title = title,
         description = description
     )
