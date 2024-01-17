@@ -1,7 +1,9 @@
 package com.example.mediumspringwebmvc.domain.article.api
 
 import com.example.mediumspringwebmvc.domain.article.dto.ArticleRequest
+import com.example.mediumspringwebmvc.domain.article.dto.ArticleResponse
 import com.example.mediumspringwebmvc.domain.article.service.*
+import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
@@ -20,7 +22,8 @@ class ArticleController(
     @PostMapping
     fun create(@RequestBody request: ArticleRequest) = createArticle.execute(request)
 
-    fun findAll() {}
+    @GetMapping
+    fun findAll(): List<ArticleResponse> = findAllArticle.execute()
 
     fun findById() {}
 
