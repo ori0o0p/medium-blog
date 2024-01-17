@@ -11,7 +11,7 @@ class FindByIdArticle(
 
     fun execute(id: Long): ArticleDetailResponse {
         val article = findArticle.findById(id)
-        val commentResponses = article.comments.map { comment -> comment.toCommentResponse() }
+        val commentResponses = article.comments.map { it.toCommentResponse() }
 
         return ArticleDetailResponse(
             id = article.id,
