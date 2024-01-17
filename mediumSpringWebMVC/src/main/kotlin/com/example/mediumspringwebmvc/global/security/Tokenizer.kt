@@ -24,5 +24,14 @@ class Tokenizer {
             .compact()
     }
 
+    fun verifyToken(token: String?): Boolean {
+        try {
+            Jwts.parser().setSigningKey(SECRET)
+                .parseClaimsJws(token)
+            return true
+        } catch (e: Exception) {
+            return false
+        }
+    }
 
 }
