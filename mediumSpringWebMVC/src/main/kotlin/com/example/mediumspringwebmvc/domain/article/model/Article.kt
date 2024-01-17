@@ -3,6 +3,7 @@ package com.example.mediumspringwebmvc.domain.article.model
 import com.example.mediumspringwebmvc.domain.article.dto.ArticleRequest
 import com.example.mediumspringwebmvc.domain.article.dto.ArticleResponse
 import com.example.mediumspringwebmvc.domain.comment.model.Comment
+import com.example.mediumspringwebmvc.domain.like.model.Like
 import jakarta.persistence.CascadeType
 import jakarta.persistence.Entity
 import jakarta.persistence.GeneratedValue
@@ -26,7 +27,10 @@ class Article(
     var updatedDate: LocalDate,
 
     @OneToMany(mappedBy = "article", cascade = [CascadeType.ALL])
-    var comments: List<Comment>
+    var comments: List<Comment>,
+
+    @OneToMany(mappedBy = "article", cascade = [CascadeType.ALL])
+    var likes: List<Like>
 
 ) {
 
