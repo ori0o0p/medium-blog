@@ -21,7 +21,7 @@ class DeleteArticle(
         if (user != article.writer) {
             throw RuntimeException("유저 정보가 일치하지 않음")
         }
-        
+
         articleRepository.delete(article)
     }
 
