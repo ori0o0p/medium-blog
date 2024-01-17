@@ -1,4 +1,7 @@
 package com.example.mediumspringwebmvc.domain.like.repository
 
-interface LikeRepository {
+import com.example.mediumspringwebmvc.domain.like.model.Like
+import org.springframework.data.jpa.repository.JpaRepository
+
+interface LikeRepository: JpaRepository<Like, Long> {
 }
