@@ -4,6 +4,7 @@ import com.example.mediumspringwebmvc.domain.article.dto.ArticleRequest
 import com.example.mediumspringwebmvc.domain.article.model.Article
 import com.example.mediumspringwebmvc.domain.article.repository.ArticleRepository
 import org.springframework.stereotype.Service
+import org.springframework.transaction.annotation.Transactional
 import java.time.LocalDate
 
 @Service
@@ -11,6 +12,7 @@ class CreateArticle(
     private val articleRepository: ArticleRepository
 ) {
 
+    @Transactional
     fun execute(request: ArticleRequest) {
         val article = Article(
             title = request.title,
