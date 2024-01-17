@@ -1,7 +1,6 @@
 package com.example.mediumspringwebmvc.domain.article.service
 
 import com.example.mediumspringwebmvc.domain.article.dto.ArticleResponse
-import com.example.mediumspringwebmvc.domain.article.model.Article
 import com.example.mediumspringwebmvc.domain.article.repository.ArticleRepository
 import org.springframework.stereotype.Service
 
