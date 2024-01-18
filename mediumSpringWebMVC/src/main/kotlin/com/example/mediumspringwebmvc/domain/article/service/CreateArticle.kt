@@ -24,8 +24,7 @@ class CreateArticle(
             writer = user,
             createdDate = LocalDate.now(),
             updatedDate = LocalDate.now(),
-            comments = ArrayList(),
-            likes = ArrayList())
+            comments = ArrayList())
 
         articleRepository.save(article)
     }

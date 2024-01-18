@@ -36,9 +36,6 @@ class Article(
     @OneToMany(mappedBy = "article", cascade = [CascadeType.ALL])
     var comments: List<Comment>,
 
-    @OneToMany(mappedBy = "article", cascade = [CascadeType.ALL])
-    var likes: List<Like>
-
 ) {
 
     fun edit(request: ArticleRequest) {
