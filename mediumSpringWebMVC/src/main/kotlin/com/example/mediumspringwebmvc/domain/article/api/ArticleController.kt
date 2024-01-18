@@ -1,5 +1,6 @@
 package com.example.mediumspringwebmvc.domain.article.api
 
+import com.example.mediumspringwebmvc.domain.article.dto.ArticleDetailResponse
 import com.example.mediumspringwebmvc.domain.article.dto.ArticleRequest
 import com.example.mediumspringwebmvc.domain.article.dto.ArticleResponse
 import com.example.mediumspringwebmvc.domain.article.service.*
@@ -29,7 +30,7 @@ class ArticleController(
     fun findAll(): List<ArticleResponse> = findAllArticle.execute()
 
     @GetMapping("/{id}")
-    fun findById(@PathVariable id: Long): ArticleResponse = findByIdArticle.execute(id)
+    fun findById(@PathVariable id: Long): ArticleDetailResponse = findByIdArticle.execute(id)
 
     @PatchMapping("/{id}")
     fun update(@PathVariable id: Long, @RequestBody request: ArticleRequest) =
