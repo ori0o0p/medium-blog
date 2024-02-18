@@ -1,7 +1,9 @@
 package com.example.mediumspringwebflux.global.security;
 
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.server.reactive.ServerHttpRequest;
+import org.springframework.http.server.reactive.ServerHttpResponse;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.ReactiveSecurityContextHolder;
 import org.springframework.util.StringUtils;
@@ -19,23 +21,22 @@ public class JwtWebFilter implements WebFilter {
 
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, WebFilterChain chain) {
-        return resolveToken(exchange.getRequest())
-                .flatMap(token -> {
-                    if (tokenizer.verify(token)) {
-                        Authentication authentication = tokenizer.getAuthentication(token);
-                        return chain.filter(exchange)
-                                .contextWrite(ReactiveSecurityContextHolder.withAuthentication(authentication));
-                    } else {
-                        return chain.filter(exchange);
-                    }
-                })
-                .switchIfEmpty(chain.filter(exchange));
+        String token = resolveToken(exchange.getRequest());
+        if (token != null) {
+            return tokenizer.getAuthentication(token)
+                    .flatMap(auth -> chain.filter(exchange)
+                            .contextWrite(ReactiveSecurityContextHolder.withAuthentication(auth)));
+        }
+        return chain.filter(exchange);
     }
 
-    private Mono<String> resolveToken(ServerHttpRequest request) {
-        return Mono.justOrEmpty(request.getHeaders().getFirst(HttpHeaders.AUTHORIZATION))
-                .filter(authHeader -> authHeader.startsWith("Bearer "))
-                .map(authHeader -> authHeader.substring(7));
+    private String resolveToken(ServerHttpRequest request) {
+        String token = request.getHeaders().getFirst(HttpHeaders.AUTHORIZATION);
+        if (token != null && token.startsWith("Bearer ")) {
+            return token.substring(7);
+        } else {
+            return null;
+        }
     }
 
 }

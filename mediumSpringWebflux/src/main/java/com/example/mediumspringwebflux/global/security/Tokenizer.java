@@ -1,14 +1,12 @@
 package com.example.mediumspringwebflux.global.security;
 
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jws;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.*;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
+import reactor.core.publisher.Mono;
 
 import java.util.Calendar;
 import java.util.Collections;
@@ -40,22 +38,15 @@ public class Tokenizer {
                 .compact();
     }
 
-    public Boolean verify(String token) {
-        try {
-            parse(token);
-            return true;
-        } catch (Exception e) {
-            return false;
-        }
+    private Mono<Jws<Claims>> parse(String token) {
+        return Mono.fromCallable(() -> Jwts.parser().setSigningKey(SECRET)
+                        .parseClaimsJws(token))
+                .onErrorMap(e -> new RuntimeException());
     }
 
-    private Jws<Claims> parse(String token) {
-        return Jwts.parser().setSigningKey(SECRET)
-                .parseClaimsJws(token);
-    }
-
-    private Claims parseClaims(String token) {
-        return parse(token).getBody();
+    private Mono<Claims> parseClaims(String token) {
+        return parse(token)
+                .map(Jwt::getBody);
     }
 
     private UserDetails createAuthenticatedUserFromClaims(Claims claims) {
@@ -63,11 +54,13 @@ public class Tokenizer {
         return new User(subject, "", Collections.emptyList());
     }
 
-    public Authentication getAuthentication(String token) {
-        Claims claims = parseClaims(token);
-        UserDetails details = createAuthenticatedUserFromClaims(claims);
-        return new UsernamePasswordAuthenticationToken(
-                details, null, details.getAuthorities());
+    public Mono<Authentication> getAuthentication(String token) {
+        return parseClaims(token)
+                .map(this::createAuthenticatedUserFromClaims)
+                .map(details -> new UsernamePasswordAuthenticationToken(
+                        details, null, details.getAuthorities()));
     }
+
+
 
 }
