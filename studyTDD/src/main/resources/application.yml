@@ -1,1 +1,4 @@
-
+naver:
+  client:
+    id: ${NAVER_ID}
+    secret: ${NAVER_SECRET}
