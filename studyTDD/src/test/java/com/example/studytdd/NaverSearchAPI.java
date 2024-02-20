@@ -8,6 +8,8 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
 
+import java.util.List;
+
 @Configuration
 class WebClientConfig {
 
@@ -45,4 +47,11 @@ public class NaverSearchAPI {
                 .block();
     }
 
+}
+
+record SearchResult(String lastBuildDate, String total, String start, String display, List<Item> items) {
+}
+
+record Item(String title, String link, String category, String description, String telephone, String address,
+            String roadAddress, String mapx, String map) {
 }
