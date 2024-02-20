@@ -1,5 +1,6 @@
 package com.example.studytdd;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -9,6 +10,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.TestPropertySource;
+import org.springframework.util.Assert;
 import org.springframework.web.reactive.function.client.WebClient;
 
 import java.util.List;
@@ -40,7 +42,12 @@ public class StudyTddApplicationTests {
 
     @Test
     void testGet() {
-        SearchResult response = webCilent.get()
+        SearchResult result = search();
+        Assertions.assertEquals(result.items().size(), 5);
+    }
+
+    SearchResult search() {
+        return webCilent.get()
                 .uri(uriBuilder -> uriBuilder
                         .queryParam("query", "마트")
                         .queryParam("display", 5)
@@ -50,8 +57,6 @@ public class StudyTddApplicationTests {
                 .retrieve()
                 .bodyToMono(SearchResult.class)
                 .block();
-
-        System.out.println(response);
     }
 
 }
