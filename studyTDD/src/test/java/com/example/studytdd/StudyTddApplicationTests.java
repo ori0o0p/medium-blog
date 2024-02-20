@@ -11,6 +11,8 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.web.reactive.function.client.WebClient;
 
+import java.util.List;
+
 @Configuration
 class WebClientConfig {
 
@@ -38,7 +40,7 @@ public class StudyTddApplicationTests {
 
     @Test
     void testGet() {
-        String response = webCilent.get()
+        SearchResult response = webCilent.get()
                 .uri(uriBuilder -> uriBuilder
                         .queryParam("query", "마트")
                         .queryParam("display", 5)
@@ -46,10 +48,17 @@ public class StudyTddApplicationTests {
                         .queryParam("sort", "random")
                         .build())
                 .retrieve()
-                .bodyToMono(String.class)
+                .bodyToMono(SearchResult.class)
                 .block();
 
         System.out.println(response);
     }
 
+}
+
+record SearchResult(String lastBuildDate, String total, String start, String display, List<Item> items) {
+}
+
+record Item(String title, String link, String category, String description, String telephone, String address,
+            String roadAddress, String mapx, String map) {
 }
