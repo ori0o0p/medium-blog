@@ -38,26 +38,14 @@ class WebClientConfig {
 @SpringBootTest
 public class StudyTddApplicationTests {
     @Autowired
-    private WebClient webCilent;
+    private NaverSearchAPI naverSearchAPI;
 
     @Test
     void testGet() {
-        SearchResult result = search();
+        SearchResult result = naverSearchAPI.search();
         Assertions.assertEquals(result.items().size(), 5);
     }
 
-    SearchResult search() {
-        return webCilent.get()
-                .uri(uriBuilder -> uriBuilder
-                        .queryParam("query", "마트")
-                        .queryParam("display", 5)
-                        .queryParam("start", 1)
-                        .queryParam("sort", "random")
-                        .build())
-                .retrieve()
-                .bodyToMono(SearchResult.class)
-                .block();
-    }
 
 }
 
