@@ -14,7 +14,7 @@ public class StudyTddApplicationTests {
 
     @Test
     void testGet() {
-        SearchResult result = naverSearchAPI.search();
+        SearchResult result = naverSearchAPI.search(new SearchRequest("옷",5, 1,"random"));
         Assertions.assertEquals(result.items().size(), 5);
     }
 

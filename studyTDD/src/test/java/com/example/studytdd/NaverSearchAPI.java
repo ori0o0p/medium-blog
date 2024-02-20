@@ -34,19 +34,22 @@ public class NaverSearchAPI {
     @Autowired
     WebClient webClient;
 
-    public SearchResult search() {
+    public SearchResult search(SearchRequest request) {
         return webClient.get()
                 .uri(uriBuilder -> uriBuilder
-                        .queryParam("query", "마트")
-                        .queryParam("display", 5)
-                        .queryParam("start", 1)
-                        .queryParam("sort", "random")
+                        .queryParam("query", request.query())
+                        .queryParam("display", request.display())
+                        .queryParam("start", request.start())
+                        .queryParam("sort", request.sort())
                         .build())
                 .retrieve()
                 .bodyToMono(SearchResult.class)
                 .block();
     }
 
+}
+
+record SearchRequest(String query, Integer display, Integer start, String sort) {
 }
 
 record SearchResult(String lastBuildDate, String total, String start, String display, List<Item> items) {
