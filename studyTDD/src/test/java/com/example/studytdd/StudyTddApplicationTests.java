@@ -5,8 +5,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.util.List;
-
 @SpringBootTest
 public class StudyTddApplicationTests {
     @Autowired
@@ -17,6 +15,5 @@ public class StudyTddApplicationTests {
         SearchResult result = naverSearchAPI.search(new SearchRequest("옷",5, 1,"random"));
         Assertions.assertEquals(result.items().size(), 5);
     }
-
 
 }
