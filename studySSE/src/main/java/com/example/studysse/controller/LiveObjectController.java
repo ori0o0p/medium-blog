@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import java.time.Duration;
+
 @RestController
 @RequiredArgsConstructor
 public class LiveObjectController {
@@ -30,6 +32,17 @@ public class LiveObjectController {
                         .data(object)
                         .event("!!")
                         .build());
+    }
+
+    @GetMapping("/str")
+    public Flux<ServerSentEvent<String>> getStr() {
+        Mono<String> data_1 = Mono.just("first");
+        Mono<String> data_2 = Mono.just("second");
+
+        return Flux.concat(
+                data_1.map(data -> ServerSentEvent.<String>builder().data(data).build()),
+                data_2.delayElement(Duration.ofSeconds(10)).map(data -> ServerSentEvent.<String>builder().data(data).build())
+        );
     }
 
 }
