@@ -1,20 +1,21 @@
-package com.example.mediumspringwebmvc.domain.article.service
+package com.example.mediumspringwebmvc.domain.article.component.service
 
 import com.example.mediumspringwebmvc.domain.article.repository.ArticleRepository
-import com.example.mediumspringwebmvc.domain.article.service.facade.FindArticle
+import com.example.mediumspringwebmvc.domain.article.component.ArticleComponent
+import com.example.mediumspringwebmvc.domain.article.component.facade.FindArticle
 import com.example.mediumspringwebmvc.domain.user.service.facade.UserFacade
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
 @Service
-class DeleteArticle(
+abstract class DeleteArticle(
     private val articleRepository: ArticleRepository,
     private val findArticle: FindArticle,
     private val userFacade: UserFacade
-) {
+): ArticleComponent() {
 
     @Transactional
-    fun execute(id: Long) {
+    override fun delete(id: Long) {
         val user = userFacade.getUser()
         val article = findArticle.findById(id)
 

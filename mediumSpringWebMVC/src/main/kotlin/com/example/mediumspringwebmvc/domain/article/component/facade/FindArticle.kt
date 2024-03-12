@@ -1,4 +1,4 @@
-package com.example.mediumspringwebmvc.domain.article.service.facade
+package com.example.mediumspringwebmvc.domain.article.component.facade
 
 import com.example.mediumspringwebmvc.domain.article.model.Article
 import com.example.mediumspringwebmvc.domain.article.repository.ArticleRepository

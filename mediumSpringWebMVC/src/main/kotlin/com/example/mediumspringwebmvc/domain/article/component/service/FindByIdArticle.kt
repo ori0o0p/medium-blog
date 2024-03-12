@@ -1,22 +1,24 @@
-package com.example.mediumspringwebmvc.domain.article.service
+package com.example.mediumspringwebmvc.domain.article.component.service
 
 import com.example.mediumspringwebmvc.domain.article.dto.ArticleDetailResponse
-import com.example.mediumspringwebmvc.domain.article.service.facade.FindArticle
+import com.example.mediumspringwebmvc.domain.article.component.ArticleComponent
+import com.example.mediumspringwebmvc.domain.article.component.facade.FindArticle
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
 @Service
-class FindByIdArticle(
+abstract class FindByIdArticle(
     private val findArticle: FindArticle
-) {
+): ArticleComponent() {
 
     @Transactional(readOnly = true)
-    fun execute(id: Long): ArticleDetailResponse {
+    override fun findById(id: Long): ArticleDetailResponse {
         val article = findArticle.findById(id)
         val commentResponses = article.comments.map { it.toCommentResponse() }
 
         return ArticleDetailResponse(
             id = article.id,
+            writer = article.writer,
             title = article.title,
             description = article.description,
             comments = commentResponses
