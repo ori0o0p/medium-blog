@@ -4,3 +4,8 @@ spring:
     url: ${MYSQL_URL}
     username: ${MYSQL_USER}
     password: ${MYSQL_PW}
+
+  data:
+    mongodb:
+      database: ${MONGO_DB}
+      uri: ${MONGO_URI}
