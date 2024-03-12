@@ -3,7 +3,9 @@ package com.example.mediumspringwebmvc.domain.article.component
 import com.example.mediumspringwebmvc.domain.article.dto.ArticleDetailResponse
 import com.example.mediumspringwebmvc.domain.article.dto.ArticleRequest
 import com.example.mediumspringwebmvc.domain.article.dto.ArticleResponse
+import org.springframework.stereotype.Component
 
+@Component
 abstract class ArticleComponent {
 
     abstract fun create(request: ArticleRequest)
