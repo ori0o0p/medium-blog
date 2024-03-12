@@ -3,7 +3,9 @@ package com.example.mediumspringwebmvc.domain.article.api
 import com.example.mediumspringwebmvc.domain.article.dto.ArticleDetailResponse
 import com.example.mediumspringwebmvc.domain.article.dto.ArticleRequest
 import com.example.mediumspringwebmvc.domain.article.dto.ArticleResponse
-import com.example.mediumspringwebmvc.domain.article.service.*
+import com.example.mediumspringwebmvc.domain.article.component.*
+import com.example.mediumspringwebmvc.domain.article.component.service.*
+import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PatchMapping
@@ -16,27 +18,23 @@ import org.springframework.web.bind.annotation.RestController
 @RestController
 @RequestMapping("/api/articles")
 class ArticleController(
-    private val createArticle: CreateArticle,
-    private val findByIdArticle: FindByIdArticle,
-    private val findAllArticle: FindAllArticle,
-    private val updateArticle: UpdateArticle,
-    private val deleteArticle: DeleteArticle
+    private val articleComponent: ArticleComponent
 ) {
 
     @PostMapping
-    fun create(@RequestBody request: ArticleRequest) = createArticle.execute(request)
+    fun create(@RequestBody request: ArticleRequest) = articleComponent.create(request)
 
     @GetMapping
-    fun findAll(): List<ArticleResponse> = findAllArticle.execute()
+    fun findAll(): List<ArticleResponse> = articleComponent.findAll()
 
     @GetMapping("/{id}")
-    fun findById(@PathVariable id: Long): ArticleDetailResponse = findByIdArticle.execute(id)
+    fun findById(@PathVariable id: Long): ArticleDetailResponse = articleComponent.findById(id)
 
     @PatchMapping("/{id}")
     fun update(@PathVariable id: Long, @RequestBody request: ArticleRequest) =
-        updateArticle.execute(id, request)
+        articleComponent.update(id, request)
 
     @DeleteMapping("/{id}")
-    fun delete(@PathVariable id: Long) = deleteArticle.execute(id)
+    fun delete(@PathVariable id: Long) = articleComponent.delete(id)
 
 }
