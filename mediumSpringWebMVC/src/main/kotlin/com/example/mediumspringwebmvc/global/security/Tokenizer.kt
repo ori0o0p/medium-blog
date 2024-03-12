@@ -29,11 +29,11 @@ class Tokenizer {
     }
 
     fun verifyToken(token: String?): Boolean {
-        try {
+        return try {
             parse(token)
-            return true
+            true
         } catch (e: Exception) {
-            return false
+            false
         }
     }
 
