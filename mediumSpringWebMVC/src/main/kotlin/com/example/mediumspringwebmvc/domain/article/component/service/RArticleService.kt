@@ -1,15 +1,25 @@
 package com.example.mediumspringwebmvc.domain.article.component.service
 
-import com.example.mediumspringwebmvc.domain.article.dto.ArticleDetailResponse
-import com.example.mediumspringwebmvc.domain.article.component.ArticleComponent
+import com.example.mediumspringwebmvc.domain.article.component.RArticleComponent
 import com.example.mediumspringwebmvc.domain.article.component.facade.FindArticle
+import com.example.mediumspringwebmvc.domain.article.dto.ArticleDetailResponse
+import com.example.mediumspringwebmvc.domain.article.dto.ArticleResponse
+import com.example.mediumspringwebmvc.domain.article.repository.ArticleRepository
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
 @Service
-abstract class FindByIdArticle(
+class RArticleService(
+    private val articleRepository: ArticleRepository,
     private val findArticle: FindArticle
-): ArticleComponent() {
+): RArticleComponent {
+
+    @Transactional(readOnly = true)
+    override fun findAll(): List<ArticleResponse> {
+        val articles = articleRepository.findAll()
+
+        return articles.map { it.toArticleResponse() }
+    }
 
     @Transactional(readOnly = true)
     override fun findById(id: Long): ArticleDetailResponse {
