@@ -1,0 +1,18 @@
+spring:
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/
+      database: test
+
+    redis:
+      port:
+      host:
+
+  r2dbc:
+    url:
+    username:
+    password:
+    pool:
+      initial-size: 7
+      max-idle-time: 30ms
+      max-size: 14
