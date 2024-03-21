@@ -1,0 +1,15 @@
+type Query {
+    findAll: [Board]
+    findById(id: ID): Board
+}
+
+type Board {
+    id: ID
+    title: String
+    content: String
+}
+
+type Mutation {
+    save(title: String, content: String): Board
+
+}
