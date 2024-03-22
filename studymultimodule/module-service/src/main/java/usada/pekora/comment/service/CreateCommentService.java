@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
 import usada.pekora.article.application.GetArticlePort;
+import usada.pekora.article.application.SaveArticlePort;
 import usada.pekora.comment.CreateCommentUsecase;
 import usada.pekora.comment.application.CreateCommentPort;
 import usada.pekora.comment.model.Comment;
@@ -14,6 +15,7 @@ import usada.pekora.comment.model.dto.CreateCommentRequest;
 public class CreateCommentService implements CreateCommentUsecase {
     private final CreateCommentPort createCommentPort;
     private final GetArticlePort getArticlePort;
+    private final SaveArticlePort saveArticlePort;
 
     @Override
     public Mono<Void> create(String articleId, CreateCommentRequest request) {
@@ -22,7 +24,9 @@ public class CreateCommentService implements CreateCommentUsecase {
                 .flatMap(article -> createCommentPort.create(Comment.builder()
                         .content(request.content())
                         .article(article)
-                        .build()))
+                        .build())
+                        .doOnNext(article::addComent)
+                        .flatMap(comment -> saveArticlePort.save(article)))
                 .then();
     }
 
