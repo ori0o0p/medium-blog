@@ -1,6 +1,8 @@
 package com.example.studygraphql;
 
 import com.example.studygraphql.model.Board;
+import com.example.studygraphql.service.CreateBoardService;
+import com.example.studygraphql.service.FindBoardService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.SchemaMapping;
@@ -11,22 +13,22 @@ import java.util.List;
 @Controller
 @RequiredArgsConstructor
 public class BoardController {
-    private final BoardRepository boardRepository;
+    private final CreateBoardService createBoardService;
+    private final FindBoardService findBoardService;
 
     @SchemaMapping(typeName = "Query", field = "findById")
-    public Board findById(Long id) {
-        return boardRepository.findById(id)
-                .orElse(null);
+    public Board findById(@Argument("id") Long id) {
+        return findBoardService.findById(id);
     }
 
     @SchemaMapping(typeName = "Query", field = "findAll")
     public List<Board> findAll() {
-        return boardRepository.findAll();
+        return findBoardService.findAll();
     }
 
     @SchemaMapping(typeName = "Mutation", field = "save")
-    public Board save(@Argument("title") String title, @Argument("content") String content) {
-        return boardRepository.save(new Board(title, content));
+    public void save(@Argument("title") String title, @Argument("content") String content) {
+        createBoardService.create(title, content);
     }
 
 }
