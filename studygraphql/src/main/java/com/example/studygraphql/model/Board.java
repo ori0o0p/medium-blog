@@ -16,8 +16,9 @@ public class Board {
     @Column(name = "content")
     private String content;
 
-    public Board() {}
+    protected Board() {}
 
+    @Builder
     public Board(String title, String content) {
         this.title = title;
         this.content = content;
