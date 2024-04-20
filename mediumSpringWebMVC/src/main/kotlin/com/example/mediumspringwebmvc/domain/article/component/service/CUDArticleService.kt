@@ -24,10 +24,8 @@ class CUDArticleService(
         val article = Article(
             title = request.title,
             description = request.description,
-            writer = user,
-            createdDate = LocalDate.now(),
-            updatedDate = LocalDate.now(),
-            comments = ArrayList())
+            writer = user
+        )
 
         articleRepository.save(article)
     }
