@@ -16,24 +16,23 @@ import org.springframework.web.bind.annotation.RestController
 @RestController
 @RequestMapping("/api/articles")
 class ArticleController(
-    private val cruArticleComponent: CUDArticleComponent,
-    private val rArticleComponent: RArticleComponent
+    private val cudArticleComponent: CUDArticleComponent,
+    private val readArticleComponent: ReadArticleComponent
 ) {
 
     @PostMapping
-    fun create(@RequestBody request: ArticleRequest) = cruArticleComponent.create(request)
+    fun create(@RequestBody request: ArticleRequest) = cudArticleComponent.create(request)
 
     @GetMapping
-    fun findAll(): List<ArticleResponse> = rArticleComponent.findAll()
+    fun findAll(): List<ArticleResponse> = readArticleComponent.findAll()
 
     @GetMapping("/{id}")
-    fun findById(@PathVariable id: Long): ArticleDetailResponse = rArticleComponent.findById(id)
+    fun findById(@PathVariable id: Long): ArticleDetailResponse = readArticleComponent.findById(id)
 
     @PatchMapping("/{id}")
     fun update(@PathVariable id: Long, @RequestBody request: ArticleRequest) =
-        cruArticleComponent.update(id, request)
+        cudArticleComponent.update(id, request)
 
     @DeleteMapping("/{id}")
-    fun delete(@PathVariable id: Long) = cruArticleComponent.delete(id)
-
+    fun delete(@PathVariable id: Long) = cudArticleComponent.delete(id)
 }

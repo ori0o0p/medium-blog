@@ -1,6 +1,6 @@
 package com.example.mediumspringwebmvc.domain.article.component.service
 
-import com.example.mediumspringwebmvc.domain.article.component.RArticleComponent
+import com.example.mediumspringwebmvc.domain.article.component.ReadArticleComponent
 import com.example.mediumspringwebmvc.domain.article.component.facade.FindArticle
 import com.example.mediumspringwebmvc.domain.article.dto.ArticleDetailResponse
 import com.example.mediumspringwebmvc.domain.article.dto.ArticleResponse
@@ -9,10 +9,10 @@ import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
 @Service
-class RArticleService(
+class ReadArticleService(
     private val articleRepository: ArticleRepository,
     private val findArticle: FindArticle
-): RArticleComponent {
+): ReadArticleComponent {
 
     @Transactional(readOnly = true)
     override fun findAll(): List<ArticleResponse> {

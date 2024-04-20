@@ -1,6 +1,6 @@
 package com.example.mediumspringwebmvc.domain.comment.service
 
-import com.example.mediumspringwebmvc.domain.article.service.facade.FindArticle
+import com.example.mediumspringwebmvc.domain.article.component.facade.FindArticle
 import com.example.mediumspringwebmvc.domain.comment.dto.CommentRequest
 import com.example.mediumspringwebmvc.domain.comment.model.Comment
 import com.example.mediumspringwebmvc.domain.comment.repository.CommentRepository

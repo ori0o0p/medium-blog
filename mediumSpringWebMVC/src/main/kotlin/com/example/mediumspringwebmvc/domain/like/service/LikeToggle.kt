@@ -1,6 +1,6 @@
 package com.example.mediumspringwebmvc.domain.like.service
 
-import com.example.mediumspringwebmvc.domain.article.service.facade.FindArticle
+import com.example.mediumspringwebmvc.domain.article.component.facade.FindArticle
 import com.example.mediumspringwebmvc.domain.like.model.Like
 import com.example.mediumspringwebmvc.domain.like.repository.LikeRepository
 import com.example.mediumspringwebmvc.domain.like.service.facade.FindLike
