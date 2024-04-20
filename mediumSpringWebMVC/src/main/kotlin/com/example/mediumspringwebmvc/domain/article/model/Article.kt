@@ -13,6 +13,8 @@ import jakarta.persistence.Id
 import jakarta.persistence.JoinColumn
 import jakarta.persistence.ManyToOne
 import jakarta.persistence.OneToMany
+import org.hibernate.annotations.CreationTimestamp
+import org.hibernate.annotations.UpdateTimestamp
 import java.time.LocalDate
 
 @Entity
@@ -29,13 +31,14 @@ class Article(
     @JoinColumn(name = "writer_id")
     val writer: User,
 
-    val createdDate: LocalDate,
+    @CreationTimestamp
+    var createdDate: LocalDate? = null,
 
-    var updatedDate: LocalDate,
+    @UpdateTimestamp
+    var updatedDate: LocalDate? = null,
 
     @OneToMany(mappedBy = "article", cascade = [CascadeType.ALL])
-    var comments: List<Comment>,
-
+    var comments: MutableList<Comment> = mutableListOf(),
 ) {
 
     fun edit(request: ArticleRequest) {
@@ -44,11 +47,15 @@ class Article(
         updatedDate = LocalDate.now()
     }
 
-    fun toArticleResponse(): ArticleResponse = ArticleResponse(
-        id = id,
-        writer = writer,
-        title = title,
-        description = description
-    )
+    companion object {
+        fun toArticleResponse(article: Article): ArticleResponse {
+            return ArticleResponse(
+                id = article.id,
+                writer = article.writer,
+                title = article.title,
+                description = article.description
+            )
+        }
+    }
 
 }
