@@ -37,8 +37,10 @@ class CUDArticleService(
         val user = userFacade.getUser()
         val article = findArticle.findById(id)
 
-        if (user != article.writer) {
-            throw RuntimeException("유저 정보가 일치하지 않음")
+        article.writer.let {
+            if (it != user) {
+                throw RuntimeException("유저 정보가 일치하지 않음")
+            }
         }
 
         articleRepository.delete(article)
